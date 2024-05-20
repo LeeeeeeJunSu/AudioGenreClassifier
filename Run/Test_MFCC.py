@@ -23,8 +23,8 @@ for genre in os.listdir(Define.PATH_ALL_DATA):
     for i, file in enumerate(os.listdir(Define.PATH_ALL_DATA + genre)):
         if i >= 20:
             break
-        audio, samplingRate = Util.load_audio_file(Define.PATH_ALL_DATA + genre + '/' + file)
-        feature = featureExtractor.extract(audio, samplingRate)
+        audio = Util.load_audio_file(Define.PATH_ALL_DATA + genre + '/' + file)
+        feature = featureExtractor.extract(audio)
         print(f'{genre} {i+1}번째 음악 특징 추출 완료')
         for f in feature:
             lstFeature.append([f.mean(), f.var()])

@@ -23,13 +23,12 @@ class MFCC:
         self.n_fft = n_fft
         self.segment_length = segment_length
 
-    def extract(self, audio, sampling_rate):
+    def extract(self, audio):
         '''
         Func: 
             MFCC 특징 추출 메소드
         Parameters:
             audio : 오디오 신호
-            sampling_rate : 샘플링 레이트
         Returns:
             각 Segment 별로 추출한 MFCC 리스트
         Description
@@ -38,7 +37,7 @@ class MFCC:
             MFCC 추출에 사용되는 파라미터는 생성자를 통해 결정
             Segment 분리 시 남는 부분은 제거
         '''
-        segment_samples = int(self.segment_length * sampling_rate)
+        segment_samples = int(self.segment_length * Define.SAMPLING_RATE)
         mfcc_list = []
         for start in range(0, len(audio), segment_samples):
             end = start + segment_samples
@@ -47,12 +46,12 @@ class MFCC:
             segment = audio[start:end]
             if len(segment) < self.n_fft:
                 continue
-            mfcc = librosa.feature.mfcc(y=segment, sr=sampling_rate, n_mfcc=self.n_mfcc, hop_length=int(self.n_fft / 4), n_fft=self.n_fft)
+            mfcc = librosa.feature.mfcc(y=segment, sr=Define.SAMPLING_RATE, n_mfcc=self.n_mfcc, hop_length=int(self.n_fft / 4), n_fft=self.n_fft)
             mfcc_list.append(mfcc.T)
             '''
             # show mfcc
             plt.figure(figsize=(10, 4))
-            librosa.display.specshow(mfcc, x_axis='time', sr=sampling_rate, hop_length=int(self.n_fft / 4))
+            librosa.display.specshow(mfcc, x_axis='time', sr=Define.SAMPLING_RATE, hop_length=int(self.n_fft / 4))
             plt.colorbar()
             plt.title('MFCC')
             plt.tight_layout()
@@ -79,7 +78,6 @@ class OSC:
             OSC 특징 추출 메소드
         Parameters:
             audio : 오디오 신호
-            sampling_rate : 샘플링 레이트
         Returns:
             음원 내 주파수 밴드 별 Peak, Valley의 대비 리스트
         '''

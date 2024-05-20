@@ -30,8 +30,8 @@ featureExtractor = FeatureExtractor.OSC()
 for genre, lstPath in dictPath.items():
     lstOSC = []
     for i, path in enumerate(lstPath):
-        audio, samplingRate = Util.load_audio_file(path)
-        osc = featureExtractor.extract(audio, samplingRate)
+        audio = Util.load_audio_file(path)
+        osc = featureExtractor.extract(audio)
         lstOSC.append(osc)
         print(f'{genre} {i+1}번째 음악 OSC 추출 완료')
     dictOSC[genre] = lstOSC
