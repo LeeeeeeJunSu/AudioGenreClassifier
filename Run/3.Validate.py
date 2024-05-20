@@ -6,3 +6,6 @@ Implement the SVM Classifier Validation
 4. 예측 결과 CSV 파일로 저장
 5. 예측 결과에 대한 Accuracy(전체, 장르별) 계산, 시각화, 저장
 '''
+import sys
+import os
+sys.path.append(os.path.dirname(os.path.dirname(os.path.abspath(__file__)))) # Root Folder를 Python Path에 추가
