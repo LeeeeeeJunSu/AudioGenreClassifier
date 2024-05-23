@@ -1,0 +1,5 @@
+yt_dlp
+numpy
+scipy
+scikit-learn
+librosa

@@ -1,5 +1,23 @@
+# 상위 폴더 Import를 위한 경로 추가
+import sys
+import os
+sys.path.append(os.path.dirname(os.path.dirname(os.path.abspath(__file__))))
+
+# 필요한 Module Import
+import re
+import time
+import pickle
+import numpy as np
+import scipy.io.wavfile as wavfile
+import scipy.signal as signal
+
+# Custom Module Import
+import Module.Define as Define
+import Module.Classifier as Classifier
+
 '''
 Utility Function 구현 파일
+Run.py에서 사용되는 함수들을 구현
     - loadLastTrainPathByGenre(): 마지막 데이터 추출 시 트레이닝 데이터 경로 반환
     - loadLastValidationPathByGenre(): 마지막 데이터 추출 시 검증 데이터 경로 반환
     - loadLastTrainFeature(): 마지막 특징 추출 시 트레이닝 데이터 반환
@@ -12,17 +30,6 @@ Utility Function 구현 파일
     - saveValidationResult(result, totalAccuracy, genreAccuracy): 검증 결과 저장
     - getURLByGenre(): 장르 별 유튜브 플레이 리스트 URL 반환
 '''
-import sys
-import os
-import re
-import time
-import numpy as np
-import scipy.io.wavfile as wavfile
-import scipy.signal as signal
-import pickle
-sys.path.append(os.path.dirname(os.path.dirname(os.path.abspath(__file__)))) # Root Folder를 Python Path에 추가
-import Module.Define as Define
-from Module import Classifier
 
 def loadLastTrainPathByGenre():
     base_path = Define.PATH_TRAIN_DATA

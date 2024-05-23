@@ -1,12 +1,20 @@
-#Implement Feature Extractor
+# 상위 폴더 Import를 위한 경로 추가
 import sys
 import os
-sys.path.append(os.path.dirname(os.path.dirname(os.path.abspath(__file__)))) # Root Folder를 Python Path에 추가
- 
+sys.path.append(os.path.dirname(os.path.dirname(os.path.abspath(__file__))))
+
+# 필요한 Module Import
 import librosa
-import scipy.signal as signal
 import numpy as np
+import scipy.signal as signal
+
+# Custom Module Import
 import Module.Define as Define
+
+'''
+Feature Extraction Module
+MFCC, OSC 특징 추출 클래스 구현
+'''
 
 class MFCC:
     def __init__(self, n_mfcc = 13, n_fft = 2048, segment_length = 6):

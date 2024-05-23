@@ -1,3 +1,19 @@
+# 상위 폴더 Import를 위한 경로 추가
+import sys
+import os
+sys.path.append(os.path.dirname(os.path.dirname(os.path.abspath(__file__))))
+
+# 필요한 Module Import
+from collections import Counter
+import numpy as np
+import yt_dlp
+
+# Custom Module Import
+import Module.Define as Define
+from Module import FeatureExtractor
+from Module import Classifier
+from Module import Util
+
 '''
 메인 실행 파일
 데이터 수집, 전처리, 학습, 예측을 실행한다.
@@ -15,39 +31,20 @@ FeatureSelection 변수 변경을 통해 어떤 피처를 사용할지 결정할
     - Define.PATH_MODEL에 모델, 스케일러가 없는 경우 에러 발생
 
 이전에 실행했던 Feature Selection과 다른 Feature Selection을 사용할 경우 FEATURE_EXTRACTION 단계부터 다시 시작해야 한다.
-
-To Do
-    1. MFCC, OSC Class를 FeatureExtraction로 통합
-        - FeatureExtraction에서 Feature Selection을 결정할 수 있도록 변경
-        - FeatureExtraction에서 MFCC, OSC 진행 시 필요한 파라미터를 설정 하는 함수 추가
-        - FeatureExtraction에서 extract 함수 진행 시 Feature Selection에 따라 다른 피처를 추출하도록 변경
-        - FeatureExtraction에서 extract 함수 반환 값은 dictionary로 변경 ({MFCC: [], OSC: []} 형태)
-    2. 각 단계 별 시각화 및 시각화 저장 추가
-    3. 진행 상황 출력 추가
 '''
-
-import sys
-import os
-import numpy as np
-import yt_dlp
-from collections import Counter
-sys.path.append(os.path.dirname(os.path.dirname(os.path.abspath(__file__)))) # Root Folder를 Python Path에 추가
-import Module.Define as Define
-from Module import FeatureExtractor
-from Module import Classifier
-from Module import Util
 
 # 시작 지점 및 사용할 피처 설정
 startProcess = Define.Process.FEATURE_EXTRACTION
 featureSelection = Define.Feature.MFCC
 
-# 시작 지점에 따른 사전 데이터 설정
 trainPathByGenre = None # {Genre: [Path]}
 validationPathByGenre = None # {Genre: [Path]}
 trainData = None # [Feature]
 trainLabel = None # [Label]
 validationData = None # {Path : ([feature], [label)}
 svmClassifier = None
+
+# 시작 지점에 따른 사전 데이터 설정
 if startProcess == Define.Process.FEATURE_EXTRACTION:
     trainPathByGenre = Util.loadLastTrainPathByGenre()
     validationPathByGenre = Util.loadLastValidationPathByGenre()

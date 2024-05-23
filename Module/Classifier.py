@@ -1,9 +1,16 @@
-# Implement the SVM
+# 상위 폴더 Import를 위한 경로 추가
 import sys
 import os
-sys.path.append(os.path.dirname(os.path.dirname(os.path.abspath(__file__)))) # Root Folder를 Python Path에 추가
+sys.path.append(os.path.dirname(os.path.dirname(os.path.abspath(__file__))))
+
+# 필요한 Module Import
 from sklearn.preprocessing import StandardScaler
 from sklearn.svm import SVC
+
+'''
+Classifier Module
+SVM Classifier 구현
+'''
 
 class SVM:
     def __init__(self, kernel='rbf', gamma='scale'):
