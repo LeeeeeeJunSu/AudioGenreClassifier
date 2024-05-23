@@ -8,7 +8,7 @@ import scipy.signal as signal
 import numpy as np
 import matplotlib.pyplot as plt
 import librosa.display
-import Define
+import Module.Define as Define
 
 class MFCC:
     def __init__(self, n_mfcc = 13, n_fft = 2048, segment_length = 6):
@@ -48,6 +48,7 @@ class MFCC:
                 continue
             mfcc = librosa.feature.mfcc(y=segment, sr=Define.SAMPLING_RATE, n_mfcc=self.n_mfcc, hop_length=int(self.n_fft / 4), n_fft=self.n_fft)
             mfcc_list.append(mfcc.T)
+            
             '''
             # show mfcc
             plt.figure(figsize=(10, 4))

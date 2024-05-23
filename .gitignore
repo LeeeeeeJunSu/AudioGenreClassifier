@@ -1,1 +1,5 @@
 __pycache__/
+*.wav
+*.pkl
+*.csv
+*.txt
