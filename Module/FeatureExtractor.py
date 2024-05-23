@@ -6,8 +6,6 @@ sys.path.append(os.path.dirname(os.path.dirname(os.path.abspath(__file__)))) # R
 import librosa
 import scipy.signal as signal
 import numpy as np
-import matplotlib.pyplot as plt
-import librosa.display
 import Module.Define as Define
 
 class MFCC:
@@ -48,16 +46,6 @@ class MFCC:
                 continue
             mfcc = librosa.feature.mfcc(y=segment, sr=Define.SAMPLING_RATE, n_mfcc=self.n_mfcc, hop_length=int(self.n_fft / 4), n_fft=self.n_fft)
             mfcc_list.append(mfcc.T)
-            
-            '''
-            # show mfcc
-            plt.figure(figsize=(10, 4))
-            librosa.display.specshow(mfcc, x_axis='time', sr=Define.SAMPLING_RATE, hop_length=int(self.n_fft / 4))
-            plt.colorbar()
-            plt.title('MFCC')
-            plt.tight_layout()
-            plt.show()
-            '''
         return mfcc_list
 
 class OSC:
